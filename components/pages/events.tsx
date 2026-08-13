@@ -50,7 +50,7 @@ const events = [
 
 export default function EventHomePage() {
     return (
-        <section className="w-full px-5  sm:px-8 md:px-12 lg:px-16">
+        <section className="w-full px-5 mb-3 sm:px-8 md:px-12 lg:px-16">
             <div className="mx-auto max-w-7xl">
 
                 <motion.div
@@ -115,7 +115,7 @@ export default function EventHomePage() {
                                         Upcoming Event
                                     </p>
 
-                                    <h2 className="text-xl font-bold leading-snug sm:text-2xl">
+                                    <h2 className="font-bold leading-snug sm:text-2xl">
                                         {event.title}
                                     </h2>
 
