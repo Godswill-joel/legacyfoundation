@@ -3,7 +3,8 @@
 import aboutimg from "@/public/aboutbg.jpg";
 import PageHero from '@/components/pages/pageHero';
 import ContactPage from "@/components/pages/contact";
-import ImpactStats from "@/components/pages/countDown";
+import MeetOurTeam from "@/components/pages/our_team";
+
 
 
 

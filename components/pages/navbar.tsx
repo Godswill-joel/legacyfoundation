@@ -23,17 +23,9 @@ const navItems = [
     path: "/contact",
   },
   {
-    name: "Donate",
-    path: "/donate",
-  },
-  {
     name: "Gallery",
     path: "/gallery",
-  },
-  {
-    name: "Services",
-    path: "/services",
-  },
+  }
 ];
 export default function Nav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -364,38 +356,11 @@ export default function Nav() {
                 a Time
               </h2>
 
-              <p className="mt-4 text-sm leading-7 text-gray-600">
-                Patrick Osam
-                Ntun Legacy
-                Foundation is
-                a non-profit
-                organization
-                committed to
-                improving
-                lives through
-                education,
-                youth
-                empowerment,
-                cultural
-                preservation,
-                and community
-                development.
+              <p className="mt-4 text-sm leading-7 text-gray-600"> Patrick Osam Ntun Legacy Foundation is a non-profit organization committed to improving lives through education, youth empowerment, cultural preservation, and community development.
               </p>
 
-              <p className="mt-4 text-sm leading-7 text-gray-600">
-                We work to
-                create
-                opportunities
-                for children,
-                young people,
-                and
-                communities
-                while
-                preserving
-                cultural
-                heritage and
-                supporting
-                those in need.
+              <p className="mt-4 text-sm leading-7 text-gray-600">  We work to
+                create opportunities for children, young people, and communities while preserving cultural heritage and supporting those in need.
               </p>
 
             </div>
@@ -460,21 +425,7 @@ export default function Nav() {
                       Address
                     </p>
 
-                    <p className="text-sm leading-6 text-gray-600">
-                      House 1,
-                      Close 1,
-                      Owhor
-                      Chukwu
-                      Street,
-                      Off Aka
-                      Road,
-                      Rumuorlumeni,
-                      Port
-                      Harcourt,
-                      Rivers
-                      State,
-                      Nigeria.
-                    </p>
+                    <p className="text-sm leading-6 text-gray-600"> House 1, Close 1, Owhor Chukwu Street, Off Aka Road, Rumuorlumeni, Port Harcourt, Rivers State, Nigeria.</p>
                   </div>
 
                 </div>
@@ -496,17 +447,7 @@ export default function Nav() {
 
               </div>
 
-              <p className="mt-3 text-sm leading-6 text-gray-600">
-                Your support
-                can help
-                provide
-                education,
-                food, skills,
-                and
-                opportunities
-                to those who
-                need them
-                most.
+              <p className="mt-3 text-sm leading-6 text-gray-600"> Your support can help provide education, food, skills, and opportunities to those who need them most.
               </p>
 
               <Button

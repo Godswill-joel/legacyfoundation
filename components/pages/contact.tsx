@@ -13,7 +13,7 @@ import {
 
 export default function ContactPage() {
     return (
-        <main className="w-full overflow-hidden bg-[#f8f9f6]">
+        <main className="w-full overflow-hidden">
             <section className="px-5 py-16 sm:px-8 md:px-12 lg:px-16 lg:py-24">
                 <div className="mx-auto max-w-7xl">
                     <motion.div
@@ -44,7 +44,7 @@ export default function ContactPage() {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true, amount: 0.2 }}
                             transition={{ duration: 0.7 }}
-                            className="bg-white p-6 shadow-sm sm:p-8 lg:p-10"
+                            className="bg-white p-6  shadow-sm sm:p-8 lg:p-10"
                         >
                             <div className="mb-8">
                                 <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#008000]">
@@ -155,7 +155,7 @@ export default function ContactPage() {
                                     </motion.div>
                                 </div>
 
-                                <p className="text-sm leading-7 text-white/80">
+                                <p className="text-sm lg:text-lg leading-7 text-white/80">
                                     Your support helps us empower children,
                                     support education, strengthen communities,
                                     and create opportunities for young people.
@@ -199,7 +199,7 @@ export default function ContactPage() {
                                             Email Us
                                         </h3>
                                         <p className="mt-1 text-sm text-gray-600">
-                                            info@yourfoundation.org
+                                            info@foundation.org
                                         </p>
                                     </div>
                                 </div>
@@ -247,9 +247,9 @@ export default function ContactPage() {
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
-                        className="relative h-[320px] overflow-hidden bg-[#e9ece7] sm:h-[400px]"
+                        className="relative h-80 overflow-hidden bg-[#e9ece7] sm:h-100"
                     >
-                        <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(#008000_1px,transparent_1px),linear-gradient(90deg,#008000_1px,transparent_1px)] [background-size:40px_40px]" />
+                        <div className="absolute inset-0 opacity-30 " />
 
                         <motion.div
                             animate={{
@@ -262,16 +262,9 @@ export default function ContactPage() {
                             }}
                             className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center"
                         >
-                            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#008000] text-white shadow-xl">
-                                <MapPin className="h-6 w-6" />
-                            </div>
-
-                            <div className="mt-3 bg-white px-5 py-3 text-center shadow-lg">
+                            <div >
                                 <p className="text-sm font-bold">
-                                    Patrick Osam Ntun Legacy Foundation
-                                </p>
-                                <p className="mt-1 text-xs text-gray-500">
-                                    Port Harcourt, Rivers State
+                                    map placeholder
                                 </p>
                             </div>
                         </motion.div>
