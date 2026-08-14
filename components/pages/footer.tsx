@@ -1,13 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import logo from "@/public/logo.jpeg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faInstagram,
-    faYoutube,
-    faWhatsapp,
-} from "@fortawesome/free-brands-svg-icons";
-import { Button } from "../ui/button";
+import youtube from "@/public/youtube.png";
+import instagram from "@/public/instagram.png";
+import whatsapp from "@/public/whatsapp.png";
 
 const footerLinks = [
     { label: "Service", href: "/services" },
@@ -24,9 +20,9 @@ const quickLinks = [
 ];
 
 const socialLinks = [
-    { href: "#", icon: faInstagram },
-    { href: "#", icon: faYoutube },
-    { href: "#", icon: faWhatsapp },
+    { href: "#", icon: instagram, alt: "Instagram" },
+    { href: "#", icon: youtube, alt: "YouTube" },
+    { href: "#", icon: whatsapp, alt: "WhatsApp" },
 ];
 
 export default function Footer() {
@@ -115,11 +111,13 @@ export default function Footer() {
                                     href={social.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex h-10 w-10 items-center justify-center rounded-full border border-[#d8d1c5] transition-all duration-300 hover:border-[#81705a] hover:bg-[#006b00] hover:text-white"
+                                    aria-label={social.alt}
+                                    className="flex h-10 w-10 items-center justify-center rounded-full border border-[#d8d1c5] transition-all duration-300 hover:border-[#81705a] "
                                 >
-                                    <FontAwesomeIcon
-                                        icon={social.icon}
-                                        className="h-5 w-5"
+                                    <Image
+                                        src={social.icon}
+                                        alt={social.alt}
+                                        className="h-7 w-7 object-contain"
                                     />
                                 </a>
                             ))}
