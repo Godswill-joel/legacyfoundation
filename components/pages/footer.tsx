@@ -1,6 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import logo from '@/public/logo.jpeg';
+import logo from "@/public/logo.jpeg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faInstagram,
+    faYoutube,
+    faWhatsapp,
+} from "@fortawesome/free-brands-svg-icons";
+import { Button } from "../ui/button";
 
 const footerLinks = [
     { label: "Service", href: "/services" },
@@ -17,22 +24,27 @@ const quickLinks = [
 ];
 
 const socialLinks = [
-    { label: "Instagram", href: "#" },
-    { label: "YouTube", href: "#" },
-    { label: "WhatsApp", href: "#" },
+    { href: "#", icon: faInstagram },
+    { href: "#", icon: faYoutube },
+    { href: "#", icon: faWhatsapp },
 ];
 
 export default function Footer() {
     return (
-        <footer className="border-t  p-4 text-[#28251f]">
-            <div className="mx-auto  px-6 py-14 sm:px-8 lg:px-10">
+        <footer className="border-t p-4 text-[#28251f]">
+            <div className="mx-auto px-6 py-14 sm:px-8 lg:px-10">
+
                 {/* Main footer */}
                 <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
 
                     {/* Brand */}
                     <div>
-                        <div className='border-r-2 p-4'>
-                            <Image src={logo} alt="Logo" className="h-20 w-20" />
+                        <div className="border-r-2 p-4">
+                            <Image
+                                src={logo}
+                                alt="Logo"
+                                className="h-20 w-20"
+                            />
                         </div>
 
                         <p className="mt-6 max-w-xs font-serif text-lg leading-8 text-[#5e584d]">
@@ -90,29 +102,32 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    {/* Social / Discover */}
+                    {/* Social */}
                     <div>
-                        <p className="text-lg text-[#00000] font-semibold">
+                        <p className="text-lg font-semibold text-[#28251f]">
                             Get To Know More
                         </p>
 
-                        <div className="mt-5 flex flex-wrap gap-x-5 gap-y-3">
-                            {socialLinks.map((social) => (
+                        <div className="mt-5 flex items-center gap-5">
+                            {socialLinks.map((social, index) => (
                                 <a
-                                    key={social.label}
+                                    key={index}
                                     href={social.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="font-serif text-lg transition-colors hover:text-[#81705a]"
+                                    className="flex h-10 w-10 items-center justify-center rounded-full border border-[#d8d1c5] transition-all duration-300 hover:border-[#81705a] hover:bg-[#006b00] hover:text-white"
                                 >
-                                    {social.label}
+                                    <FontAwesomeIcon
+                                        icon={social.icon}
+                                        className="h-5 w-5"
+                                    />
                                 </a>
                             ))}
                         </div>
 
                         <a
                             href="mailto:hello@nusara.tour"
-                            className="mt-6 block font-serif text-xl transition-colors hover:text-[#81705a]"
+                            className="mt-6 block font-serif text-xl transition-colors hover:text-[#008000]"
                         >
                             hello@nusara.tour
                         </a>
@@ -121,12 +136,12 @@ export default function Footer() {
 
                 {/* Navigation */}
                 <div className="mt-14 border-t border-[#d8d1c5] pt-8">
-                    <nav className="flex flex-wrap justify-center gap-x-8 gap-y-4">
+                    <nav className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
                         {footerLinks.map((link) => (
                             <Link
                                 key={link.label}
                                 href={link.href}
-                                className="font-serif text-lg transition-colors hover:text-[#81705a]"
+                                className="font-serif text-lg transition-colors  hover:text-[#008000]"
                             >
                                 {link.label}
                             </Link>
@@ -137,13 +152,10 @@ export default function Footer() {
                 {/* Bottom */}
                 <div className="mt-8 flex flex-col gap-5 border-t border-[#d8d1c5] pt-6 text-sm text-[#81786a] sm:flex-row sm:items-center sm:justify-between">
                     <p>
-                        © {new Date().getFullYear()} Nusara. All rights reserved.
-                    </p>
-
-                    <p>
-                        Powered by Nusara
+                        © {new Date().getFullYear()} All rights reserved.
                     </p>
                 </div>
+
             </div>
         </footer>
     );
