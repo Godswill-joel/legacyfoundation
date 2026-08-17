@@ -15,7 +15,7 @@ const footerLinks = [
 const quickLinks = [
     { label: "About Us", href: "/about" },
     { label: "Our Tours", href: "/tours" },
-    { label: "Destinations", href: "/destinations" },
+    { label: "Gallery", href: "/gallery" },
     { label: "Contact", href: "/contact" },
 ];
 
