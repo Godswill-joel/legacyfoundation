@@ -9,7 +9,7 @@ const footerLinks = [
     { label: "Service", href: "/services" },
     { label: "About", href: "/about" },
     { label: "Donate", href: "/donate" },
-    { label: "Destination", href: "/destinations" },
+    { label: "Gallery", href: "/gallery" },
 ];
 
 const quickLinks = [
