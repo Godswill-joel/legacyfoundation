@@ -30,10 +30,9 @@ export default function Footer() {
         <footer className="border-t p-4 text-[#28251f]">
             <div className="mx-auto px-6 py-14 sm:px-8 lg:px-10">
 
-                {/* Main footer */}
+                
                 <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
 
-                    {/* Brand */}
                     <div>
                         <div className="border-r-2 p-4">
                             <Image
@@ -49,7 +48,6 @@ export default function Footer() {
                         </p>
                     </div>
 
-                    {/* Quick Links */}
                     <div>
                         <h2 className="font-serif text-xl font-semibold">
                             Quick Links
@@ -69,7 +67,6 @@ export default function Footer() {
                         </ul>
                     </div>
 
-                    {/* Contact */}
                     <div>
                         <h2 className="font-serif text-xl font-semibold">
                             Contact
@@ -98,7 +95,6 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    {/* Social */}
                     <div>
                         <p className="text-lg font-semibold text-[#28251f]">
                             Get To Know More
@@ -132,7 +128,6 @@ export default function Footer() {
                     </div>
                 </div>
 
-                {/* Navigation */}
                 <div className="mt-14 border-t border-[#d8d1c5] pt-8">
                     <nav className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
                         {footerLinks.map((link) => (
