@@ -7,6 +7,7 @@ import { Button } from "../ui/button";
 import feed from "@/public/feed.jpg";
 import com from "@/public/com.jpg";
 import emp from "@/public/emp.jpg";
+import Link from "next/link";
 
 
 const events = [
@@ -139,8 +140,10 @@ export default function EventHomePage() {
                                         <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-[#008000]">
                                             <ChevronsRight className="h-4 w-4" />
                                         </span>
+                                        <Link href="/gallery">
+                                            Event Details
+                                        </Link>
 
-                                        Event Details
                                     </Button>
                                 </div>
                             </div>
