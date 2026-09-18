@@ -1,55 +1,51 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ChevronsRight, MapPin } from "lucide-react";
 import { motion } from "motion/react";
 import { Button } from "../ui/button";
-import feed from "@/public/feed.jpg";
-import com from "@/public/com.jpg";
-import emp from "@/public/emp.jpg";
 import Link from "next/link";
+import { collection, onSnapshot } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
-
-const events = [
-    {
-        date: "29",
-        month: "May",
-        title: "Community Development & Outreach",
-        description:
-            "Join us as we come together to support children, families, and communities through meaningful outreach and humanitarian initiatives.",
-        venue: "Port Harcourt, Rivers State",
-        image: feed,
-    },
-    {
-        date: "12",
-        month: "Jun",
-        title: "Education For Every Child",
-        description:
-            "An initiative focused on creating access to quality education and learning opportunities for children from disadvantaged communities.",
-        venue: "Port Harcourt, Rivers State",
-        image: com,
-    },
-    {
-        date: "24",
-        month: "Jul",
-        title: "Youth Empowerment Programme",
-        description:
-            "A special programme designed to equip young people with skills, knowledge, and opportunities to build a better future.",
-        venue: "Port Harcourt, Rivers State",
-        image: emp,
-    },
-    {
-        date: "15",
-        month: "Aug",
-        title: "Feed A Child Initiative",
-        description:
-            "Help us provide nutritious meals and essential support to children while promoting their health, wellbeing, and development.",
-        venue: "Port Harcourt, Rivers State",
-        image: feed,
-    },
-];
+type Event = {
+    date: string;
+    month: string;
+    title: string;
+    description: string;
+    venue: string;
+    image: string;
+};
 
 export default function EventHomePage() {
+    const [events, setEvents] = useState<Event[]>([]);
+
+    useEffect(() => {
+        const eventsRef = collection(db, "events");
+
+        const unsubscribe = onSnapshot(
+            eventsRef,
+            (snapshot) => {
+                const eventsData = snapshot.docs.map((doc) => ({
+                    date: doc.data().date ?? "",
+                    month: doc.data().month ?? "",
+                    title: doc.data().title ?? "",
+                    description: doc.data().description ?? "",
+                    venue: doc.data().venue ?? "",
+                    image: doc.data().image ?? "",
+                }));
+
+                setEvents(eventsData);
+            },
+            (error) => {
+                console.error("Error fetching events:", error);
+            }
+        );
+
+        return () => unsubscribe();
+    }, []);
+
     return (
         <section className="w-full px-5 mb-3 sm:px-8 md:px-12 lg:px-16">
             <div className="mx-auto max-w-7xl">
@@ -63,7 +59,7 @@ export default function EventHomePage() {
                 >
                     <div>
                         <p className="mb-3 text-lg font-semibold uppercase tracking-[0.2em] text-[#008000]">
-                            Upcoming Events
+                            Events
                         </p>
 
                         <p className="max-w-md text-lg leading-7 text-gray-600">
@@ -113,7 +109,7 @@ export default function EventHomePage() {
                             <div className="flex flex-col justify-between p-6 sm:p-7">
                                 <div>
                                     <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-[#008000]">
-                                        Upcoming Event
+                                     Event
                                     </p>
 
                                     <h2 className="font-bold leading-snug sm:text-2xl">

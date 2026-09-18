@@ -4,48 +4,67 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import { Button } from "../ui/button";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
-import hero from "@/public/slider1.jpg";
-import hero2 from "@/public/1.jpg";
-import hero3 from "@/public/2.jpg";
-
-const slides = [
-    {
-        image: hero,
-        label: "Patrick Osam Ntun Legacy Foundation",
-        title: "Empowering Lives. Preserving Heritage. Building a Better Future.",
-        description:
-            "Together, we can create opportunities that give children and young people the support they need to thrive.",
-        button: "Donate Now",
-    },
-    {
-        image: hero2,
-        label: "Building Brighter Futures",
-        title: "Helping Children Build a Better Future.",
-        description:
-            "Every child deserves the opportunity to learn, grow, and reach their full potential. We work to create meaningful opportunities that give children hope for a brighter tomorrow.",
-        button: "Support a Child",
-    },
-    {
-        image: hero3,
-        label: "No Child Should Go Hungry",
-        title: "Every Child Deserves a Healthy Meal.",
-        description:
-            "Help us provide food and essential support to children in need, because no child should have to face the day without a meal.",
-        button: "Help Feed a Child",
-    },
-];
+type HeroSlide = {
+    buttonText: string;
+    description: string;
+    imageUrl: string;
+    label: string;
+    title: string;
+};
 
 export default function Hero() {
     const [currentImage, setCurrentImage] = useState(0);
+    const [slides, setSlides] = useState<HeroSlide[]>([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        const homeRef = doc(db, "homePage", "home");
+
+        const unsubscribe = onSnapshot(
+            homeRef,
+            (snapshot) => {
+                if (snapshot.exists()) {
+                    const data = snapshot.data();
+
+                    setSlides(data.hero?.slides ?? []);
+                } else {
+                    setSlides([]);
+                }
+
+                setLoading(false);
+            },
+            (error) => {
+                console.error("Error fetching homepage:", error);
+                setSlides([]);
+                setLoading(false);
+            }
+        );
+
+        return () => unsubscribe();
+    }, []);
+
+    useEffect(() => {
+        if (slides.length <= 1) return;
+
         const interval = setInterval(() => {
             setCurrentImage((prev) => (prev + 1) % slides.length);
         }, 10000);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [slides.length]);
+
+    useEffect(() => {
+        if (currentImage >= slides.length && slides.length > 0) {
+            setCurrentImage(0);
+        }
+    }, [currentImage, slides.length]);
+
+    if (loading || slides.length === 0) {
+        return null;
+    }
 
     const slide = slides[currentImage];
 
@@ -70,7 +89,7 @@ export default function Hero() {
                     className="absolute inset-0"
                 >
                     <Image
-                        src={slide.image}
+                        src={slide.imageUrl}
                         alt={slide.title}
                         fill
                         priority={currentImage === 0}
@@ -144,7 +163,7 @@ export default function Hero() {
                                     size="lg"
                                     className="rounded-none px-8 py-6 text-base"
                                 >
-                                    {slide.button}
+                                    {slide.buttonText}
                                 </Button>
                             </motion.div>
                         </motion.div>

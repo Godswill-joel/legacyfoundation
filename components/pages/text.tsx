@@ -9,50 +9,13 @@ import comImg from "@/public/com.jpg";
 
 type HistoryItem = {
     date: string;
-    title: string;
     description: string;
-    image: StaticImageData;
+    id1: number;
+    imageUrl: string;
+    title: string;
 };
 
-const history: HistoryItem[] = [
-    {
-        date: "July 2026",
-        title: "The Foundation Was Founded",
-        description:
-            "Patrick Osam Ntun Legacy Foundation was established with a commitment to empowering lives, preserving cultural heritage, supporting education, and creating opportunities for children, young people, and communities.",
-        image: aboutImg,
-    },
-    {
-        date: "2026",
-        title: "Building Community Support",
-        description:
-            "The foundation began its journey of supporting individuals and communities through charitable, humanitarian, educational, and community development initiatives.",
-        image: comImg,
-    },
-    {
-        date: "2026",
-        title: "Supporting Education",
-        description:
-            "Education became one of the foundation's core areas of focus, with an emphasis on helping students access learning opportunities and resources that can contribute to a brighter future.",
-        image: eduImg,
-    },
-    {
-        date: "2026",
-        title: "Feeding and Supporting Children",
-        description:
-            "The foundation's mission includes improving the welfare of children by supporting access to nutritious food and creating opportunities that help children grow, learn, and thrive.",
-        image: comImg,
-    },
-    {
-        date: "2026",
-        title: "Empowering Young People",
-        description:
-            "Youth empowerment became an important part of the foundation's work, focusing on skills development, leadership, creativity, innovation, and opportunities for young people.",
-        image: empImg,
-    },
-];
-
-export function OurHistory() {
+export function OurHistory({ history }: { history: HistoryItem[] }) {
     return (
         <section className="w-full overflow-hidden px-5 sm:px-8 md:px-12 lg:px-16 ">
             <div className="mx-auto max-w-7xl">
@@ -282,7 +245,7 @@ function HistoryCard({
             >
                 <div className="relative aspect-16/10 w-full overflow-hidden shadow-md">
                     <Image
-                        src={item.image}
+                        src={item.imageUrl}
                         alt={item.title}
                         fill
                         sizes="(max-width: 1024px) 50vw, 600px"
@@ -487,7 +450,7 @@ function MobileHistoryCard({
                     className="group relative aspect-16/10 overflow-hidden"
                 >
                     <Image
-                        src={item.image}
+                        src={item.imageUrl}
                         alt={item.title}
                         fill
                         sizes="calc(100vw - 75px)"

@@ -25,7 +25,17 @@ const socialLinks = [
     { href: "#", icon: whatsapp, alt: "WhatsApp" },
 ];
 
-export default function Footer() {
+type FooterProps = {
+    address: string;
+    email: string;
+    phone: string;
+};
+
+export default function Footer({
+    address,
+    email,
+    phone,
+}: FooterProps) {
     return (
         <footer className="border-t p-4 text-[#28251f]">
             <div className="mx-auto px-6 py-14 sm:px-8 lg:px-10">
@@ -74,23 +84,21 @@ export default function Footer() {
 
                         <div className="mt-6 space-y-4 text-sm leading-6 text-gray-600">
                             <p>
-                                32 Heritage Street
-                                <br />
-                                Abuja, Nigeria
+                                {address}
                             </p>
 
                             <a
-                                href="tel:+2340000000000"
+                                href={`tel:${phone}`}
                                 className="block transition-colors hover:text-[#28251f]"
                             >
-                                +234 000 000 0000
+                                {phone}
                             </a>
 
                             <a
-                                href="mailto:hello@nusara.tour"
+                                href={`mailto:${email}`}
                                 className="block transition-colors hover:text-[#28251f]"
                             >
-                                hello@nusara.tour
+                                {email}
                             </a>
                         </div>
                     </div>
@@ -120,10 +128,10 @@ export default function Footer() {
                         </div>
 
                         <a
-                            href="mailto:hello@nusara.tour"
+                            href={`mailto:${email}`}
                             className="mt-6 block font-serif text-xl transition-colors hover:text-[#008000]"
                         >
-                            hello@nusara.tour
+                            {email}
                         </a>
                     </div>
                 </div>

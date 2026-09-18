@@ -14,12 +14,12 @@ import cm from "@/public/cm.jpg";
 import yd from "@/public/yd.jpg";
 
 type SocialPlatform = {
-    platform: "facebook" | "whatsapp" | "instagram" | "twitter";
+    platform: string;
     url: string;
 };
 
 type TeamMember = {
-    image: StaticImageData;
+    imageUrl: string;
     name: string;
     position: string;
     social?: SocialPlatform[];
@@ -32,69 +32,9 @@ const socialIcons: Record<SocialPlatform["platform"], StaticImageData> = {
     twitter: x,
 };
 
-const team: TeamMember[] = [
-    {
-        image: ceo,
-        name: "Patrick Osam Ntun",
-        position: "Founder & Director",
-        social: [
-            {
-                platform: "facebook",
-                url: "https://facebook.com/",
-            },
-            {
-                platform: "whatsapp",
-                url: "https://wa.me/2349030000000",
-            },
-        ],
-    },
 
-    {
-        image: pc,
-        name: "Godswill Success",
-        position: "Program Coordinator",
-        social: [
-            {
-                platform: "facebook",
-                url: "https://facebook.com/",
-            },
-        ],
-    },
 
-    {
-        image: cm,
-        name: "Bola Ahmed Wike",
-        position: "Community Manager",
-        social: [
-            {
-                platform: "instagram",
-                url: "https://instagram.com/",
-            },
-            {
-                platform: "facebook",
-                url: "https://facebook.com/",
-            },
-        ],
-    },
-
-    {
-        image: yd,
-        name: "Michael Doe",
-        position: "Youth Development Lead",
-        social: [
-            {
-                platform: "twitter",
-                url: "https://x.com/",
-            },
-            {
-                platform: "whatsapp",
-                url: "https://wa.me/2349030000000",
-            },
-        ],
-    },
-];
-
-export default function MeetOurTeam() {
+export default function MeetOurTeam({team}: {team:TeamMember[]}) {
     return (
         <section className="w-full overflow-hidden px-5 py-16 sm:px-8 md:px-12 lg:px-16 lg:py-24">
             <div className="mx-auto max-w-7xl">
@@ -153,7 +93,7 @@ export default function MeetOurTeam() {
                             >
                                 <div className="relative h-56 w-56 overflow-hidden rounded-full border-[6px] border-[#008000]/10 bg-gray-100 sm:h-60 sm:w-60 lg:h-56 lg:w-56">
                                     <Image
-                                        src={member.image}
+                                        src={member.imageUrl}
                                         alt={member.name}
                                         fill
                                         sizes="(max-width: 640px) 224px, (max-width: 1024px) 240px, 224px"

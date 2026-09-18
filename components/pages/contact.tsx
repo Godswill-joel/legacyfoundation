@@ -11,7 +11,25 @@ import {
     Send,
 } from "lucide-react";
 
-export default function ContactPage() {
+type ContactQuote = {
+    description: string;
+    heading: string;
+    id1: number;
+};
+
+type ContactPageProps = {
+    address: string;
+    email: string;
+    phone: string;
+    quotes: ContactQuote[];
+};
+
+export default function ContactPage({
+    address,
+    email,
+    phone,
+    quotes,
+}: ContactPageProps) {
     return (
         <main className="w-full overflow-hidden">
             <section className="px-5 py-16 sm:px-8 md:px-12 lg:px-16 lg:py-24">
@@ -137,7 +155,7 @@ export default function ContactPage() {
                                         </p>
 
                                         <h2 className="mt-2 text-2xl font-bold">
-                                            Give Hope. Change A Life.
+                                            {quotes[0]?.heading ?? "Give Hope. Change A Life."}
                                         </h2>
                                     </div>
 
@@ -156,9 +174,8 @@ export default function ContactPage() {
                                 </div>
 
                                 <p className="text-sm lg:text-lg leading-7 text-white/80">
-                                    Your support helps us empower children,
-                                    support education, strengthen communities,
-                                    and create opportunities for young people.
+                                    {quotes[0]?.description ??
+                                        "Your support helps us empower children, support education, strengthen communities, and create opportunities for young people."}
                                 </p>
 
                                 <motion.button
@@ -181,10 +198,7 @@ export default function ContactPage() {
                                             Our Address
                                         </h3>
                                         <p className="mt-1 text-sm leading-6 text-gray-600">
-                                            Patrick Osam Ntun Legacy Foundation
-                                            <br />
-                                            Port Harcourt, Rivers State,
-                                            Nigeria
+                                            {address}
                                         </p>
                                     </div>
                                 </div>
@@ -199,7 +213,7 @@ export default function ContactPage() {
                                             Email Us
                                         </h3>
                                         <p className="mt-1 text-sm text-gray-600">
-                                            info@foundation.org
+                                            {email}
                                         </p>
                                     </div>
                                 </div>
@@ -214,7 +228,7 @@ export default function ContactPage() {
                                             Call Us
                                         </h3>
                                         <p className="mt-1 text-sm text-gray-600">
-                                            +234 903 000 0000
+                                            {phone}
                                         </p>
                                     </div>
                                 </div>

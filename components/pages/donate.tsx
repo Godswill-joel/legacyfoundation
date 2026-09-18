@@ -1,50 +1,66 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
-import icon1 from "@/public/feature1.png";
-import icon2 from "@/public/feature2.png";
-import icon3 from "@/public/feature3.png";
-import icon4 from "@/public/feature4.png";
-import eduImg from "@/public/edu.jpg";
-import feed from "@/public/feed.jpg";
-import com from "@/public/com.jpg";
-import emp from "@/public/emp.jpg";
-import aboutimg from '@/public/about-thumb.png';
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 import { Button } from "@/components/ui/button";
 
-const features = [
-    {
-        image: icon1,
-        bgImage: eduImg,
-        title: "Education For Citizens",
-        description:
-            "Supporting access to quality education, learning resources, and opportunities that help children build a brighter future.",
-    },
-    {
-        image: icon2,
-        bgImage: feed,
-        title: "Feed A Child",
-        description:
-            "Providing nutritious meals and essential support to children in need, helping them grow healthy and strong.",
-    },
-    {
-        image: icon3,
-        bgImage: emp,
-        title: "Youth Empowerment",
-        description:
-            "Equipping young people with skills, leadership opportunities, and support to reach their full potential.",
-    },
-    {
-        image: icon4,
-        bgImage: com,
-        title: "Community Development",
-        description:
-            "Supporting humanitarian and community initiatives that improve lives and create opportunities for sustainable growth.",
-    },
-];
+type Feature = {
+    bgImageUrl: string;
+    description: string;
+    iconUrl: string;
+    title: string;
+};
+
+type DonateData = {
+    buttonText: string;
+    checklist: string[];
+    description: string;
+    heading: string;
+    imageUrl: string;
+    label: string;
+    subheading: string;
+    features: Feature[];
+};
 
 export default function Donate() {
+    const [donate, setDonate] = useState<DonateData | null>(null);
+    const [features, setFeatures] = useState<Feature[]>([]);
+
+    useEffect(() => {
+        const homeRef = doc(db, "homePage", "home");
+
+        const unsubscribe = onSnapshot(
+            homeRef,
+            (snapshot) => {
+                if (snapshot.exists()) {
+                    const data = snapshot.data();
+
+                    if (Array.isArray(data.features)) {
+                        setFeatures(data.features);
+                    }
+
+
+                    if (data.donate) {
+                        setDonate(data.donate);
+                    }
+                    
+                }
+            },
+            (error) => {
+                console.error("Error fetching donate section:", error);
+            }
+        );
+
+        return () => unsubscribe();
+    }, []);
+
+    if (!donate) {
+        return null;
+    }
+
     return (
         <section className="w-full px-5 py-20 sm:px-8 md:px-12 lg:px-16">
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -65,7 +81,7 @@ export default function Donate() {
                         {/* Background Image */}
                         <div className="absolute inset-y-0 left-0 z-0 w-0 overflow-hidden transition-all duration-700 ease-in-out group-hover:w-full">
                             <Image
-                                src={feature.bgImage}
+                                src={feature.bgImageUrl}
                                 alt=""
                                 fill
                                 className="object-cover"
@@ -80,7 +96,7 @@ export default function Donate() {
                             {/* Icon */}
                             <div className="flex h-20 w-20 items-center justify-center overflow-hidden p-4 transition-transform duration-500 group-hover:scale-110">
                                 <Image
-                                    src={feature.image}
+                                    src={feature.iconUrl}
                                     alt=""
                                     width={80}
                                     height={80}
@@ -112,33 +128,23 @@ export default function Donate() {
                     className="max-w-xl"
                 >
                     <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-[#008000]">
-                        Make A Difference
+                        {donate.label}
                     </p>
 
                     <h2 className="text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
-                        Join Us and Start Donating Today!
+                        {donate.heading}
                     </h2>
 
                     <p className="mt-4 text-xl font-medium leading-relaxed">
-                        Helping each other can make the world a better place.
+                        {donate.subheading}
                     </p>
 
                     <p className="mt-5 text-sm leading-7 text-black sm:text-base">
-                        Your support can help provide education, nutritious meals,
-                        opportunities, and essential support to children and communities
-                        in need. Together, we can create meaningful change and build a
-                        better future for the next generation.
+                        {donate.description}
                     </p>
 
                     <ul className="mt-6 grid gap-3 text-sm sm:grid-cols-2">
-                        {[
-                            "Quality education",
-                            "Food and nutrition",
-                            "Youth empowerment",
-                            "Community development",
-                            "Health and wellbeing",
-                            "Skills and opportunities",
-                        ].map((item) => (
+                        {donate.checklist.map((item) => (
                             <li
                                 key={item}
                                 className="flex items-center gap-3"
@@ -156,7 +162,7 @@ export default function Donate() {
                             size="lg"
                             className="rounded-none px-8 py-6"
                         >
-                            Donate Now
+                            {donate.buttonText}
                         </Button>
                     </div>
                 </motion.div>
@@ -179,8 +185,8 @@ export default function Donate() {
                         className="relative"
                     >
                         <Image
-                            src={aboutimg}
-                            alt="Support children through donation"
+                            src={donate.imageUrl}
+                            alt={donate.label}
                             width={700}
                             height={600}
                             className="h-auto w-full object-cover"

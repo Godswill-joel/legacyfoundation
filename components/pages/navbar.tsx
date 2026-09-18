@@ -27,7 +27,20 @@ const navItems = [
     path: "/gallery",
   }
 ];
-export default function Nav() {
+
+type FooterProps = {
+  address: string;
+  email: string;
+  phone: string;
+};
+
+
+export default function Nav({
+  address,
+  email,
+  phone,
+}: FooterProps) {
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [contactSheetOpen, setContactSheetOpen] = useState(false);
 
@@ -63,7 +76,12 @@ export default function Nav() {
                 <Phone className="h-4 w-4" />
 
                 <span>
-                  (251) 235-3256
+                  <a
+                    href={`tel:${phone}`}
+                    className="block transition-colors hover:text-[#28251f]"
+                  >
+                    {phone}
+                  </a>
                 </span>
               </p>
             </div>
@@ -284,10 +302,10 @@ export default function Nav() {
                     <Phone className="h-4 w-4 text-[#008000]" />
 
                     <a
-                      href="tel:+2512353256"
-                      className="transition-colors hover:text-[#008000]"
+                      href={`tel:${phone}`}
+                      className="block transition-colors hover:text-[#28251f]"
                     >
-                      (251) 235-3256
+                      {phone}
                     </a>
                   </p>
                 </div>
@@ -385,12 +403,10 @@ export default function Nav() {
                       Phone
                     </p>
 
-                    <a
-                      href="tel:+2512353256"
+                    <a href={`tel:+${phone}`}
                       className="text-sm text-gray-600 transition-colors hover:text-[#008000]"
                     >
-                      +251
-                      235-3256
+                      {phone}
                     </a>
                   </div>
 
@@ -408,7 +424,7 @@ export default function Nav() {
                     </p>
 
                     <p className="text-sm text-gray-600">
-                      info@patrickosamntun.org
+                      {email}
                     </p>
                   </div>
 
@@ -425,7 +441,7 @@ export default function Nav() {
                       Address
                     </p>
 
-                    <p className="text-sm leading-6 text-gray-600"> House 1, Close 1, Owhor Chukwu Street, Off Aka Road, Rumuorlumeni, Port Harcourt, Rivers State, Nigeria.</p>
+                    <p className="text-sm leading-6 text-gray-600">{address}</p>
                   </div>
 
                 </div>

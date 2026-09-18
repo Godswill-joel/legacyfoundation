@@ -3,36 +3,14 @@
 import { motion, useInView } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
-type Stat = {
-    value: number;
-    suffix: string;
+
+type StatItem = {
     label: string;
+    suffix: string;
+    value: number;
 };
 
-const stats: Stat[] = [
-    {
-        value: 260,
-        suffix: "+",
-        label: "Total Happy Children",
-    },
-    {
-        value: 110,
-        suffix: "+",
-        label: "Total Volunteers",
-    },
-    {
-        value: 190,
-        suffix: "+",
-        label: "Products & Gifts",
-    },
-    {
-        value: 560,
-        suffix: "+",
-        label: "Worldwide Donors",
-    },
-];
-
-export default function ImpactStats() {
+export default function ImpactStats({stats}: {stats: StatItem[]}) {
     return (
         <section className="w-full bg-[#008000] p-8 sm:px-8 md:px-12 lg:px-16 ">
             <div className="mx-auto max-w-7xl">
@@ -70,7 +48,7 @@ function StatCounter({
     stat,
     index,
 }: {
-    stat: Stat;
+    stat: StatItem;
     index: number;
 }) {
     const ref = useRef<HTMLDivElement>(null);
